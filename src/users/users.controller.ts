@@ -9,6 +9,7 @@ import {
   Delete,
   NotFoundException,
   Session,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user-dto';
@@ -18,6 +19,7 @@ import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Serialize(UserDto)
 @Controller('auth')
@@ -39,6 +41,7 @@ export class UsersController {
   //   return session.color;
   // }
 
+  @UseGuards(AuthGuard)
   @Get('/whoami')
   whoAmI(@CurrentUser() user: User) {
     return user;
