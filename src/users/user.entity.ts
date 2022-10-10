@@ -33,6 +33,6 @@ export class User {
   // will fire after removing a new user
   @AfterRemove()
   logRemove() {
-    console.log('Removed User with id', this.id);
+    console.log('Removed User');
   }
 }
