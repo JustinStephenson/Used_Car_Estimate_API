@@ -43,12 +43,14 @@ import cookieSession from 'cookie-session';
   ],
 })
 export class AppModule {
+  constructor(private configService: ConfigService) {}
+
   configure(consumer: MiddlewareConsumer) {
     // apply globally scoped middleware
     consumer
       .apply(
         cookieSession({
-          keys: ['asdfasdf'],
+          keys: [this.configService.get('COOKIE_KEY')],
         }),
       )
       .forRoutes('*');
