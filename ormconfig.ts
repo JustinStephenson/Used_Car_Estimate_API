@@ -22,7 +22,15 @@ switch (process.env.NODE_ENV) {
       migrationsRun: true,
     });
   case 'production':
-    break;
+    Object.assign(dbConfig, {
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      entities: ['**/*.entity.js'],
+      migrationsRun: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    });
   default:
     throw new Error('unknown environment');
 }
