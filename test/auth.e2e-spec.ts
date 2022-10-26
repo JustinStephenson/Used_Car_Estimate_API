@@ -3,6 +3,9 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { AppModule } from './../src/app.module';
 
+// increase timeout to allow migrations to run
+jest.setTimeout(10000);
+
 describe('Authentication System (e2e)', () => {
   let app: INestApplication;
 
